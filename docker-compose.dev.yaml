@@ -1,0 +1,62 @@
+# Use postgres/example user/password credentials
+x-configs: &config
+  env_file:
+    - .env.dev
+services:
+  postgres:
+    image: postgres:17
+    restart: unless-stopped
+    container_name: postgres
+    <<: *config
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./dev/db_init:/docker-entrypoint-initdb.d
+    environment:
+      POSTGRES_USER: ${DB_USER:-kindwear}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-kindwear}
+      POSTGRES_DB: ${DB_NAME:-kindwear}
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "${DB_USER:-kindwear}", "-d", "${DB_NAME:-kindwear}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --save 60 1 --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    
+  minio:
+    image: quay.io/minio/minio
+    container_name: minio
+    restart: unless-stopped
+    <<: *config
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minioadmin123}
+    
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - ./data:/data
+    command: server /data --console-address ":9001"
+
+volumes:
+  postgres_data:
+  redis_data:
+  minio_data:
+  rabbitmq_data:
+  rabbitmq_log_data:
