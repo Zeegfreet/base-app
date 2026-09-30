@@ -8,8 +8,10 @@
   "main": "index.js",
   "scripts": {
     "start:dev": "tsx --env-file=.env --watch src/server.ts",
+    "start:dev:worker": "tsx --env-file=.env --watch src/worker.ts",
     "build": "npx tsc && tsc-alias",
     "start": "node ./dist/server.js",
+    "start:worker": "node ./dist/worker.js",
     "test": "jest",
     "lint": "eslint ."
   },

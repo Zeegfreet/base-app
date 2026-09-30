@@ -1,4 +1,4 @@
-import { sendMailFactory } from "@app/factories/mailer/send-mail-factory.js";
+import { queueSendMailFactory } from "@app/factories/mailer/queue-send-mail-factory.js";
 import { RetrievePasswordUseCase } from "@data/use-cases/index.js";
 import { RedisRetrievePasswordRepository } from "@infra/cache/repositories/index.js";
 import { CryptoHasherAdapter, CryptoTokenGeneratorAdapter } from "@infra/cryptography/index.js";
@@ -11,7 +11,7 @@ export const retrievePasswordControllerFactory = () => {
     const tokenGenerator = new CryptoTokenGeneratorAdapter();
     const saveRetrievePasswordTokenRepository = new RedisRetrievePasswordRepository();
     const simpleHasher = new CryptoHasherAdapter();
-    const mailer = sendMailFactory();
+    const mailer = queueSendMailFactory();
     const mailerSendRetrievePassword = new RetrievePasswordMailerService(mailer,
         process.env.DNS || "http://localhost:8090"
     );

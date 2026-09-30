@@ -1,4 +1,4 @@
-import { sendMailFactory } from "@app/factories/mailer/send-mail-factory.js";
+import { queueSendMailFactory } from "@app/factories/mailer/queue-send-mail-factory.js";
 import { SendAccountConfirmationService } from "@data/services/index.js";
 import { RedisConfirmationTokenRepository } from "@infra/cache/repositories/index.js";
 import { CryptoHasherAdapter, CryptoTokenGeneratorAdapter } from "@infra/cryptography/index.js";
@@ -9,7 +9,7 @@ export const sendAccountConfirmationServiceFactory = () => {
     const tokenGenerator = new CryptoTokenGeneratorAdapter();
     const saveConfirmationTokenRepository = new RedisConfirmationTokenRepository();
     const simpleHasher = new CryptoHasherAdapter();
-    const sendMail = sendMailFactory();
+    const sendMail = queueSendMailFactory();
     const mailer = new AccountConfirmationMailerService(
         sendMail,
         process.env.DNS || "http://localhost:8090"

@@ -8,9 +8,14 @@ export const createMailWorker = (handle: (data: MailJobData) => Promise<void>) =
         connection: queueConnection(),
         concurrency: 5,
     });
-
+    worker.on("ready", () => {
+        console.warn(`🚀[WORKER - ${MAIL_QUEUE}]: ready to receive jobs.`);
+    });
+    worker.on("completed", (job) => {
+        console.warn(`[WORKER - ${MAIL_QUEUE}]: job: ${job?.id} finalizada com sucesso`);
+    });
     worker.on("failed", (job, err) =>
-        console.error(`[WORKER]: job ${job?.id} falhou (tentativa ${job?.attemptsMade})`, err));
+        console.error(`[WORKER - ${MAIL_QUEUE}]: job ${job?.id} falhou (tentativa ${job?.attemptsMade})`, err));
 
     return worker;
 };

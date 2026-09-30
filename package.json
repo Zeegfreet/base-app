@@ -1,0 +1,24 @@
+{
+  "name": "service-desk",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "api:dev": "npm run start:dev -w service",
+    "worker:dev": "npm run start:dev:worker -w service",
+    "frontend:dev": "npm run dev -w frontend",
+    "dev": "concurrently \"npm run api:dev\" \"npm run worker:dev\" \"npm run frontend:dev\" "
+  },
+  "workspaces": [
+    "service",
+    "frontend"
+  ],
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "concurrently": "^10.0.5"
+  }
+}

@@ -51,4 +51,4 @@ prisma/dev.db-journal
 temp/
 
 # Minio
-data
+/data

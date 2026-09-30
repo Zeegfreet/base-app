@@ -3,7 +3,7 @@ import { type JobsOptions, Queue } from "bullmq";
 
 import { queueConnection } from "../config/queue-connection.js";
 
-export const MAIL_QUEUE = "mail";
+export const MAIL_QUEUE = "mailer";
 export type MailJobData = SendMail.Params;
 
 export const mailJobOptions: JobsOptions = {
