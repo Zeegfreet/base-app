@@ -1,7 +1,7 @@
 import type { PropsWithChildren } from "react"
 
 export interface TypographyProps extends PropsWithChildren {
-    
+
 }
 
 const Paragraph: React.FC<TypographyProps> = ({ children }) => {
@@ -12,7 +12,7 @@ const Paragraph: React.FC<TypographyProps> = ({ children }) => {
 
 const H1: React.FC<TypographyProps> = ({ children }) => {
     return (
-        <h1>{children}</h1>
+        <h1 className="text-2xl font-bold">{children}</h1>
     )
 }
 

@@ -7,10 +7,8 @@ export const Route = createFileRoute('/_public/')({
 
 function RouteComponent() {
   return (
-    <div>
-      <div className=' m-10 border rounded-sm p-3 center'>
-        <SignInForm />
-      </div>
+    <div className='p-5 h-full flex flex-col justify-center'>
+      <SignInForm />
     </div>
   )
 }
