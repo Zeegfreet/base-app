@@ -23,6 +23,7 @@
     "noFallthroughCasesInSwitch": true,
 
     /* SHADCN REQUIREMENTS */
+    "ignoreDeprecations": "6.0",
     "baseUrl": ".",
     "paths": {
       "@/*": [
