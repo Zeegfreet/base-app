@@ -9,7 +9,7 @@ export const Route = createFileRoute('/_public/signup')({
 
 function RouteComponent() {
   return (
-    <div className='p-5 h-full flex flex-col justify-center'>
+    <div className='p-5'>
       <SignUpForm />
     </div>
   )

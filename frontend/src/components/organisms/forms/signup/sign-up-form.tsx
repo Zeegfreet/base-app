@@ -2,14 +2,15 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Controller, useForm } from "react-hook-form"
 import { signUpSchema, type SignUpSchemaType } from "./sign-up-schema"
-import { Field, FieldDescription, FieldError, FieldLabel } from "@/components/ui/field"
+import { Field, FieldError, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { useTranslation } from "react-i18next"
-
+import { HelpCircle } from "lucide-react"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 
 export const SignUpForm: React.FC = () => {
-    const { t } = useTranslation()
+    const { t } = useTranslation(["auth", "common"])
     const form = useForm<SignUpSchemaType>({
         resolver: zodResolver(signUpSchema),
         mode: 'onBlur',
@@ -30,7 +31,7 @@ export const SignUpForm: React.FC = () => {
     return (
         <Card>
             <CardHeader>
-                <CardTitle>{t("welcome")}</CardTitle>
+                <CardTitle>{t("titles.SignUp")}</CardTitle>
             </CardHeader>
             <CardContent>
                 <form onSubmit={form.handleSubmit(handleSubmit)} className="flex gap-3 flex-col">
@@ -39,7 +40,7 @@ export const SignUpForm: React.FC = () => {
                         control={form.control}
                         render={({ field, fieldState }) => (
                             <Field>
-                                <FieldLabel>Name</FieldLabel>
+                                <FieldLabel>{t("data.name")}</FieldLabel>
                                 <Input
                                     {...field}
                                     aria-invalid={fieldState.invalid}
@@ -53,7 +54,7 @@ export const SignUpForm: React.FC = () => {
                         control={form.control}
                         render={({ field, fieldState }) => (
                             <Field>
-                                <FieldLabel>Username</FieldLabel>
+                                <FieldLabel>{t("data.username")}</FieldLabel>
                                 <Input
                                     {...field}
                                     aria-invalid={fieldState.invalid}
@@ -67,7 +68,7 @@ export const SignUpForm: React.FC = () => {
                         control={form.control}
                         render={({ field, fieldState }) => (
                             <Field>
-                                <FieldLabel>E-mail</FieldLabel>
+                                <FieldLabel>{t("data.email")}</FieldLabel>
                                 <Input
                                     {...field}
                                     aria-invalid={fieldState.invalid}
@@ -81,7 +82,7 @@ export const SignUpForm: React.FC = () => {
                         control={form.control}
                         render={({ field, fieldState }) => (
                             <Field>
-                                <FieldLabel>Password</FieldLabel>
+                                <FieldLabel>{t("data.password")}</FieldLabel>
                                 <Input
                                     {...field}
                                     aria-invalid={fieldState.invalid}
@@ -96,7 +97,7 @@ export const SignUpForm: React.FC = () => {
                         control={form.control}
                         render={({ field, fieldState }) => (
                             <Field>
-                                <FieldLabel>Password Confirm</FieldLabel>
+                                <FieldLabel>{t("data.pssword-confirm")}</FieldLabel>
                                 <Input
                                     {...field}
                                     aria-invalid={fieldState.invalid}
@@ -111,22 +112,27 @@ export const SignUpForm: React.FC = () => {
                         control={form.control}
                         render={({ field, fieldState }) => (
                             <Field>
-                                <FieldLabel>Document</FieldLabel>
+                                <FieldLabel>
+                                    {t("data.document")}
+                                    <Tooltip>
+                                        <TooltipTrigger><HelpCircle size={15} /></TooltipTrigger>
+                                        <TooltipContent>{t("help.document")}</TooltipContent>
+                                    </Tooltip>
+                                </FieldLabel>
                                 <Input
                                     {...field}
                                     aria-invalid={fieldState.invalid}
                                     type="text"
                                 />
-                                <FieldDescription>CNPJ da sua empresa sem máscara</FieldDescription>
                                 <FieldError>{fieldState.error?.message}</FieldError>
                             </Field>
                         )}
                     />
-                    <Button type="submit">Submit</Button>
+                    <Button type="submit">{t("common:actions.submit")}</Button>
                 </form>
             </CardContent>
             <CardFooter>
-                <Button type="button" onClick={() => form.reset()}>Limpar</Button>
+                <Button type="button" onClick={() => form.reset()}>{t("common:actions.clear")}</Button>
             </CardFooter>
         </Card>
     )

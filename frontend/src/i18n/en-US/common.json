@@ -1,7 +1,14 @@
 {
-    "welcome": "Welcome, {{name}}!",
+    "welcome": "Welcome",
     "actions": {
+        "submit": "Submit",
         "save": "Save",
-        "cancel": "Cancel"
+        "cancel": "Cancel",
+        "clear": "Clear"
+    },
+    "language": {
+        "language": "Language",
+        "pt-BR": "Portuguese",
+        "en": "English"
     }
 }

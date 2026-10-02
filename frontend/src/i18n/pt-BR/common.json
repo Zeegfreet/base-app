@@ -1,7 +1,14 @@
 {
-    "welcome": "Bem-vindo, {{name}}!",
+    "welcome": "Bem-vindo!",
     "actions": {
+        "submit": "Submeter",
         "save": "Salvar",
-        "cancel": "Cancelar"
+        "cancel": "Cancelar",
+        "clear": "Limpar"
+    },
+    "language": {
+        "language": "Idioma",
+        "pt-BR": "Português",
+        "en": "Inglês"
     }
 }

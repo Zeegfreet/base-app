@@ -1,18 +1,10 @@
 import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import enCommon from "./en-US/common.json"
-import ptCommon from "./pt-BR/common.json"
 import LanguageDetector from "i18next-browser-languagedetector"
+import * as z from "zod"
+import { resources } from './resources';
 
 export const defaultNS = 'common';
-export const resources = {
-    en: {
-        common: enCommon
-    },
-    "pt-BR": {
-        common: ptCommon
-    }
-}
 
 i18next
     .use(LanguageDetector)
@@ -24,4 +16,20 @@ i18next
         interpolation: { escapeValue: false }
     })
 
+
+type AppLanguage = keyof typeof resources;
+
+const zodLocales = {
+    'pt-BR': z.locales.ptBR,
+    en: z.locales.en,
+} satisfies Record<AppLanguage, typeof z.locales.en>;
+
+function syncZodLocale() {
+    const fallbackLng = 'pt-BR'
+    const lng = (i18next.resolvedLanguage ?? fallbackLng) as AppLanguage;
+    z.config(zodLocales[lng]());
+}
+
+i18next.on('languageChanged', syncZodLocale)
+syncZodLocale()
 export default i18next
