@@ -1,0 +1,7 @@
+{
+    "welcome": "Bem-vindo, {{name}}!",
+    "actions": {
+        "save": "Salvar",
+        "cancel": "Cancelar"
+    }
+}

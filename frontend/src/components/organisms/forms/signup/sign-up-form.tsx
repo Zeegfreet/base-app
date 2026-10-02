@@ -1,20 +1,25 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Controller, useForm } from "react-hook-form"
 import { signUpSchema, type SignUpSchemaType } from "./sign-up-schema"
-import { Field, FieldError, FieldLabel } from "@/components/ui/field"
+import { Field, FieldDescription, FieldError, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import { useTranslation } from "react-i18next"
 
 
 export const SignUpForm: React.FC = () => {
+    const { t } = useTranslation()
     const form = useForm<SignUpSchemaType>({
         resolver: zodResolver(signUpSchema),
+        mode: 'onBlur',
         defaultValues: {
             name: '',
             username: '',
+            email: '',
             password: '',
-            passwordConfirm: ''
+            passwordConfirm: '',
+            document: ''
         }
     })
 
@@ -25,7 +30,7 @@ export const SignUpForm: React.FC = () => {
     return (
         <Card>
             <CardHeader>
-                <CardTitle>Welcome</CardTitle>
+                <CardTitle>{t("welcome")}</CardTitle>
             </CardHeader>
             <CardContent>
                 <form onSubmit={form.handleSubmit(handleSubmit)} className="flex gap-3 flex-col">
@@ -35,7 +40,7 @@ export const SignUpForm: React.FC = () => {
                         render={({ field, fieldState }) => (
                             <Field>
                                 <FieldLabel>Name</FieldLabel>
-                                <Input 
+                                <Input
                                     {...field}
                                     aria-invalid={fieldState.invalid}
                                 />
@@ -49,7 +54,7 @@ export const SignUpForm: React.FC = () => {
                         render={({ field, fieldState }) => (
                             <Field>
                                 <FieldLabel>Username</FieldLabel>
-                                <Input 
+                                <Input
                                     {...field}
                                     aria-invalid={fieldState.invalid}
                                 />
@@ -63,7 +68,7 @@ export const SignUpForm: React.FC = () => {
                         render={({ field, fieldState }) => (
                             <Field>
                                 <FieldLabel>E-mail</FieldLabel>
-                                <Input 
+                                <Input
                                     {...field}
                                     aria-invalid={fieldState.invalid}
                                 />
@@ -77,7 +82,7 @@ export const SignUpForm: React.FC = () => {
                         render={({ field, fieldState }) => (
                             <Field>
                                 <FieldLabel>Password</FieldLabel>
-                                <Input 
+                                <Input
                                     {...field}
                                     aria-invalid={fieldState.invalid}
                                     type="password"
@@ -92,7 +97,7 @@ export const SignUpForm: React.FC = () => {
                         render={({ field, fieldState }) => (
                             <Field>
                                 <FieldLabel>Password Confirm</FieldLabel>
-                                <Input 
+                                <Input
                                     {...field}
                                     aria-invalid={fieldState.invalid}
                                     type="password"
@@ -107,11 +112,12 @@ export const SignUpForm: React.FC = () => {
                         render={({ field, fieldState }) => (
                             <Field>
                                 <FieldLabel>Document</FieldLabel>
-                                <Input 
+                                <Input
                                     {...field}
                                     aria-invalid={fieldState.invalid}
-                                    type="password"
+                                    type="text"
                                 />
+                                <FieldDescription>CNPJ da sua empresa sem máscara</FieldDescription>
                                 <FieldError>{fieldState.error?.message}</FieldError>
                             </Field>
                         )}
@@ -119,6 +125,9 @@ export const SignUpForm: React.FC = () => {
                     <Button type="submit">Submit</Button>
                 </form>
             </CardContent>
+            <CardFooter>
+                <Button type="button" onClick={() => form.reset()}>Limpar</Button>
+            </CardFooter>
         </Card>
     )
 }
