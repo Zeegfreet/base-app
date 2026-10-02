@@ -6,6 +6,8 @@ import { Input } from "@/components/ui/input"
 import { Controller, useForm } from "react-hook-form"
 import { signinSchema, type SignInType } from "./signin-schema"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { Link } from "@tanstack/react-router"
+import { http } from "@/services/http"
 
 
 export const SignInForm: React.FC = () => {
@@ -16,8 +18,9 @@ export const SignInForm: React.FC = () => {
             password: ""
         }
     })
-    const handleSubmit = (data: SignInType) => {
-        console.log(data)
+    const handleSubmit = async (data: SignInType) => {
+        const response = await http.get('/pub/')
+        console.log(response)
     }
     return (
         <Card className="max-w-lg">
@@ -66,7 +69,7 @@ export const SignInForm: React.FC = () => {
 
             </CardContent>
             <CardFooter className="gap-2">
-                <CardDescription>New toward here? join-us!</CardDescription>
+                <CardDescription>New toward here? <Link to="/signup" className="border-l">join-us!</Link></CardDescription>
             </CardFooter>
         </Card>
     )
