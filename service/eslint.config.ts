@@ -38,6 +38,11 @@ export default defineConfig([
     tseslint.configs.recommended,
     {
         files: ["**/*.{ts,mts,cts}"],
+        languageOptions: {
+            parserOptions: {
+                tsconfigRootDir: import.meta.dirname,
+            },
+        },
         rules: {
             "@typescript-eslint/no-namespace": "off",
         },

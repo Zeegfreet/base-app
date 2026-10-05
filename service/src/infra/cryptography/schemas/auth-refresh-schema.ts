@@ -1,4 +1,4 @@
-import z from "zod/v3";
+import z from "zod";
 
 export const authRefreshSchema = z.object({
     user: z.object({

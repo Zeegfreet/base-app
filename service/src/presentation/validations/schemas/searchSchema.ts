@@ -1,7 +1,7 @@
 import type { Primitive, PrimitiveKeys, SearchParams } from "@domain/protocols/index.js";
-import { z } from "zod/v3";
+import { z } from "zod";
 
-type FieldSchema<V extends Primitive> = z.ZodType<V, z.ZodTypeDef, unknown>;
+type FieldSchema<V extends Primitive> = z.ZodType<V>;
 
 export type SearchFields<T> = {
     [K in PrimitiveKeys<T>]?: FieldSchema<Extract<T[K], Primitive>>
@@ -28,7 +28,7 @@ const sortDirection = z.string()
 // Aceita tanto "a,b" quanto ["a", "b"].
 const splitList = (value: unknown) => typeof value === "string" ? value.split(",") : value;
 
-const filterValue = (field: z.ZodTypeAny) => {
+const filterValue = (field: z.ZodType) => {
     const list = z.preprocess(splitList, z.array(field).min(1));
     const operators = z.object({
         $eq: field,
@@ -49,8 +49,8 @@ const filterValue = (field: z.ZodTypeAny) => {
 export const makeSearchSchema = <T>(
     fields: SearchFields<T>,
     { defaultSize = 10, maxSize = 100 }: SearchSchemaOptions = {}
-): z.ZodType<SearchParams<T>, z.ZodTypeDef, unknown> => {
-    const entries = Object.entries(fields as Record<string, z.ZodTypeAny>);
+): z.ZodType<SearchParams<T>> => {
+    const entries = Object.entries(fields as Record<string, z.ZodType>);
 
     const order = z.object(Object.fromEntries(entries.map(([key]) => [key, sortDirection])))
         .partial()
@@ -67,5 +67,5 @@ export const makeSearchSchema = <T>(
         search: z.string().trim().min(1).optional(),
         order: order.optional(),
         filter: filter.optional(),
-    }) as unknown as z.ZodType<SearchParams<T>, z.ZodTypeDef, unknown>;
+    }) as unknown as z.ZodType<SearchParams<T>>;
 };

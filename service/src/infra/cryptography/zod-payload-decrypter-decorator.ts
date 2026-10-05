@@ -1,10 +1,10 @@
 import { Decrypter } from "@domain/cryptography/index.js";
-import z from "zod/v3";
+import z from "zod";
 
 export class ZodPayloadDecrypterDecorator<T> implements Decrypter<T> {
     constructor(
         private readonly decrypter: Decrypter,
-        private readonly schema: z.ZodType<T, z.ZodTypeDef, unknown>
+        private readonly schema: z.ZodType<T>
     ){}
 
     async decrypt(ciphertext: Decrypter.Ciphertext): Promise<Decrypter.Result<T>> {

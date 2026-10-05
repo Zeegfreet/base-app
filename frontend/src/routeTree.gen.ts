@@ -11,6 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as PublicRouteImport } from './routes/_public'
 import { Route as PublicIndexRouteImport } from './routes/_public/index'
+import { Route as PublicConfirmRouteImport } from './routes/_public/confirm'
+import { Route as PublicResendConfirmationRouteImport } from './routes/_public/resend-confirmation'
 import { Route as PublicSignupRouteImport } from './routes/_public/signup'
 
 const PublicRoute = PublicRouteImport.update({
@@ -22,6 +24,17 @@ const PublicIndexRoute = PublicIndexRouteImport.update({
   path: '/',
   getParentRoute: () => PublicRoute,
 } as any)
+const PublicConfirmRoute = PublicConfirmRouteImport.update({
+  id: '/confirm',
+  path: '/confirm',
+  getParentRoute: () => PublicRoute,
+} as any)
+const PublicResendConfirmationRoute =
+  PublicResendConfirmationRouteImport.update({
+    id: '/resend-confirmation',
+    path: '/resend-confirmation',
+    getParentRoute: () => PublicRoute,
+  } as any)
 const PublicSignupRoute = PublicSignupRouteImport.update({
   id: '/signup',
   path: '/signup',
@@ -30,24 +43,36 @@ const PublicSignupRoute = PublicSignupRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof PublicIndexRoute
+  '/confirm': typeof PublicConfirmRoute
+  '/resend-confirmation': typeof PublicResendConfirmationRoute
   '/signup': typeof PublicSignupRoute
 }
 export interface FileRoutesByTo {
+  '/confirm': typeof PublicConfirmRoute
+  '/resend-confirmation': typeof PublicResendConfirmationRoute
   '/signup': typeof PublicSignupRoute
   '/': typeof PublicIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_public': typeof PublicRouteWithChildren
+  '/_public/confirm': typeof PublicConfirmRoute
+  '/_public/resend-confirmation': typeof PublicResendConfirmationRoute
   '/_public/signup': typeof PublicSignupRoute
   '/_public/': typeof PublicIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/signup'
+  fullPaths: '/' | '/confirm' | '/resend-confirmation' | '/signup'
   fileRoutesByTo: FileRoutesByTo
-  to: '/signup' | '/'
-  id: '__root__' | '/_public' | '/_public/signup' | '/_public/'
+  to: '/confirm' | '/resend-confirmation' | '/signup' | '/'
+  id:
+    | '__root__'
+    | '/_public'
+    | '/_public/confirm'
+    | '/_public/resend-confirmation'
+    | '/_public/signup'
+    | '/_public/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -70,6 +95,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PublicIndexRouteImport
       parentRoute: typeof PublicRoute
     }
+    '/_public/confirm': {
+      id: '/_public/confirm'
+      path: '/confirm'
+      fullPath: '/confirm'
+      preLoaderRoute: typeof PublicConfirmRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/resend-confirmation': {
+      id: '/_public/resend-confirmation'
+      path: '/resend-confirmation'
+      fullPath: '/resend-confirmation'
+      preLoaderRoute: typeof PublicResendConfirmationRouteImport
+      parentRoute: typeof PublicRoute
+    }
     '/_public/signup': {
       id: '/_public/signup'
       path: '/signup'
@@ -81,11 +120,15 @@ declare module '@tanstack/react-router' {
 }
 
 interface PublicRouteChildren {
+  PublicConfirmRoute: typeof PublicConfirmRoute
+  PublicResendConfirmationRoute: typeof PublicResendConfirmationRoute
   PublicSignupRoute: typeof PublicSignupRoute
   PublicIndexRoute: typeof PublicIndexRoute
 }
 
 const PublicRouteChildren: PublicRouteChildren = {
+  PublicConfirmRoute: PublicConfirmRoute,
+  PublicResendConfirmationRoute: PublicResendConfirmationRoute,
   PublicSignupRoute: PublicSignupRoute,
   PublicIndexRoute: PublicIndexRoute,
 }

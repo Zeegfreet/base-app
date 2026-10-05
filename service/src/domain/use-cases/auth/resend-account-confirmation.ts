@@ -1,8 +1,11 @@
 
 export interface ResendAccountConfirmation {
-    resend(email: ResendAccountConfirmation.Email): Promise<void>
+    resend(params: ResendAccountConfirmation.Params): Promise<void>
 }
 
 export namespace ResendAccountConfirmation {
-    export type Email = string
+    export type Params = {
+        email: string
+        username: string
+    }
 }

@@ -1,5 +1,6 @@
-import z from "zod/v3";
+import z from "zod";
 
 export const resendConfirmationMailSchema = z.object({
-    email: z.string().email()
+    username: z.string(),
+    email: z.email()
 });

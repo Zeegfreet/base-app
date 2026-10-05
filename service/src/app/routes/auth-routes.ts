@@ -9,7 +9,7 @@ export const createAuthRoutes = (): Router => {
     
     router
         .post("/register",expressMiddlewareAdapter(userRegisterValidatorFactory()),  expressControllerAdapter(userRegisterControllerFactory()))
-        .post("/login", expressMiddlewareAdapter(loginValidatorFactory()), expressControllerAdapter(authLoginControllerFactory()))
+        .post("/signin", expressMiddlewareAdapter(loginValidatorFactory()), expressControllerAdapter(authLoginControllerFactory()))
         .post("/confirm/resend", expressMiddlewareAdapter(resendConfirmationMailValidationFactory()), expressControllerAdapter(resendAccountConfirmationControllerFactory()))
         .post("/confirm", expressMiddlewareAdapter(confirmAccountValidationFactory()), expressControllerAdapter(confirmAccountControllerFactory()))
         .post("/refresh", expressMiddlewareAdapter(refreshSessionValidationFactory()), expressControllerAdapter(refreshSessionControllerFactory()))

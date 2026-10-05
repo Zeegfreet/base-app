@@ -1,0 +1,8 @@
+{
+    "UNKNOWN_ERROR": "An unexpected error occurred. Please try again.",
+    "NETWORK_ERROR": "Could not reach the server. Check your connection.",
+    "VALIDATION_ERROR": "Some of the submitted data is invalid. Please review the form.",
+    "CONFLICT_ERROR": "An account with this e-mail or username already exists.",
+    "USER_UNVERIFYED_ERROR": "Attention: your account has not yet been confirmed. Check your email and click the activation link before logging in.",
+    "PASSWORD_DONT_MATCHES": "User or password is invalid."
+}

@@ -1,14 +1,14 @@
 import { SendAccountConfirmationService } from "@data/services/index.js";
-import { FindUserByEmailRepository } from "@domain/repositories/index.js";
+import { FindUserByUsernameAndEmailRepository } from "@domain/repositories/index.js";
 import { ResendAccountConfirmation } from "@domain/use-cases/index.js";
 
 export class ResendAccountConfirmationUseCase implements ResendAccountConfirmation {
     constructor(
-        private readonly findUserByEmailRepository: FindUserByEmailRepository,
+        private readonly findUserByUsernameAndEmailRepository: FindUserByUsernameAndEmailRepository,
         private readonly sendAccountConfirmationService: SendAccountConfirmationService
     ){}
-    async resend(email: ResendAccountConfirmation.Email): Promise<void> {
-        const user = await this.findUserByEmailRepository.findByEmail(email);
+    async resend({ email, username }: ResendAccountConfirmation.Params): Promise<void> {
+        const user = await this.findUserByUsernameAndEmailRepository.findByParams({ email, username });
 
         if(!user){
             return;

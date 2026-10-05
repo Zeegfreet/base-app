@@ -6,9 +6,9 @@ export class ResendAccountConfirmationController implements Controller{
     constructor(
         private readonly resendAccountConfirmation: ResendAccountConfirmation
     ){}
-    async handle(req: Controller.Request<{ email: ResendAccountConfirmation.Email }>): Promise<Controller.Response> {
-        const { email } = req.body;
-        await this.resendAccountConfirmation.resend(email);
+    async handle(req: Controller.Request<ResendAccountConfirmation.Params>): Promise<Controller.Response> {
+        const { email, username } = req.body;
+        await this.resendAccountConfirmation.resend({email, username});
         return successHandler.onSuccess({ message: "Confirmation email sended if exists." });
     }
     

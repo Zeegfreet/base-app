@@ -2,6 +2,7 @@ export * from "./user/typeorm-add-user-repository.js";
 export * from "./user/typeorm-delete-user-repository.js";
 export * from "./user/typeorm-find-user-by-email-repository.js";
 export * from "./user/typeorm-find-user-by-id-repository.js";
+export * from "./user/typeorm-find-user-by-username-and-email-repository.js";
 export * from "./user/typeorm-find-user-by-username-repository.js";
 export * from "./user/typeorm-list-users-repository.js";
 export * from "./user/typeorm-search-users-repository.js";

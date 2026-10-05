@@ -16,10 +16,13 @@ export default defineConfig([
       reactRefresh.configs.vite,
     ],
     rules: {
-      "react-refresh/only-export-components": false
+      "react-refresh/only-export-components": "off"
     },
     languageOptions: {
       globals: globals.browser,
+      parserOptions: {
+        tsconfigRootDir: import.meta.dirname,
+      },
     },
   },
 ])

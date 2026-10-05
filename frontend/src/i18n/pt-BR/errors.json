@@ -1,0 +1,8 @@
+{
+    "UNKNOWN_ERROR": "Ocorreu um erro inesperado. Tente novamente.",
+    "NETWORK_ERROR": "Não foi possível conectar ao servidor. Verifique sua conexão.",
+    "VALIDATION_ERROR": "Alguns dados enviados são inválidos. Revise o formulário.",
+    "CONFLICT_ERROR": "Já existe uma conta com este e-mail ou nome de usuário.",
+    "USER_UNVERIFYED_ERROR": "Atenção: sua conta ainda não foi confirmada. Verifique seu e-mail e clique no link de ativação antes de fazer login.",
+    "PASSWORD_DONT_MATCHES": "Usuário ou senha inválidos"
+}

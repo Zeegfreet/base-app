@@ -1,4 +1,4 @@
-import z from "zod/v3";
+import z from "zod";
 
 export const confirmAccountSchema = z.object({
     token: z.string()

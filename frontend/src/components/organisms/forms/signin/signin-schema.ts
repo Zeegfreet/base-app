@@ -4,4 +4,4 @@ export const signinSchema = z.object({
     password: z.string()
 })
 
-export type SignInType = z.infer<typeof signinSchema>
+export type SignInSchemaType = z.infer<typeof signinSchema>

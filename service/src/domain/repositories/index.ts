@@ -13,6 +13,7 @@ export * from "./user/delete-user-repository.js";
 export * from "./user/find-user-by-email-repository.js";
 export * from "./user/find-user-by-id-repository.js";
 export * from "./user/find-user-by-username-repository.js";
+export * from "./user/find-user-repository.js";
 export * from "./user/list-users-repository.js";
 export * from "./user/search-users-repository.js";
 export * from "./user/update-user-repository.js";
